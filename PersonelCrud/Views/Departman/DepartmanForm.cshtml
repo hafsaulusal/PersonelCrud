@@ -1,0 +1,36 @@
+﻿@model PersonelCrud.Models.EntityFramework.Departman
+  
+@{
+
+    ViewBag.Title = "Yeni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yeni Departman Oluştur</h2>
+
+
+@*sürekli model'e gidip bakmak yerine yardımcı method kullan*
+@*<form method="post">
+    <div class="form-group">
+        <label>Departman Adı</label>
+        <input type="text" name="Ad" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-success">Ekle</button>
+</form>*@
+
+@using (Html.BeginForm("Kaydet","Departman",FormMethod.Post))
+{
+    <div class="from-group" style="width:50%;">
+        @Html.LabelFor(m=>m.Ad)
+        @Html.TextBoxFor(m => m.Ad, new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(m=>m.Ad) @*Ad alanı yanlış girildiğinde hata mesajını buraya bas! *@
+
+    </div>
+
+    @Html.HiddenFor(m=>m.Id)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+
+}
+
+

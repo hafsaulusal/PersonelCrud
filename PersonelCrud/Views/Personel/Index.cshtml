@@ -1,0 +1,54 @@
+﻿@using PersonelCrud.Models.EntityFramework 
+@model List<Personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.ActionLink("Yeni Personel","Yeni",null,new { @class="btn btn-success"})
+<h2>Personel</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>AD</th>
+            <th>SOYAD</th>
+            <th>DEPARTMANI</th>
+            <th>MAAŞ</th>
+            <th>YAŞ</th>
+            <th>CİNSİYET</th>
+
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.Id</td>
+                <td>@personel.Ad</td>
+                <td>@personel.Soyad</td>
+                <td>@personel.Departman.Ad</td>
+                <td>@personel.Maas</td>
+                <td>@(DateTime.Now.Year-personel.DogumGunu.Value.Year)</td>
+                <td>
+                    @if(personel.Cinsiyet==true)
+                    {
+                        <span>Erkek</span>
+                    }
+                    else
+                    {
+                        <span>Kız</span>
+                    }
+
+                </td>
+               
+
+                <td><a class="btn btn-primary" href="/Personel/Güncelle/@personel.Id">Güncelle</a></td>
+                <td><a class="btn btn-danger" href="/Personel/Sil/@personel.Id">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>

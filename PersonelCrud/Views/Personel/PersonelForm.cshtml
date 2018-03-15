@@ -1,0 +1,58 @@
+﻿@model PersonelCrud.ViewModels.PersonelDepartmanViewModel
+@{
+    ViewBag.Title = "PersonelForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Personel Ekle</h2>
+
+@using (Html.BeginForm("Kaydet", "Personel", FormMethod.Post))
+{
+    <div class="form-group" style="width:50%;">
+        @Html.LabelFor(m => m.personel.Ad)
+        @Html.TextBoxFor(m => m.personel.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.personel.Ad)
+    </div>
+
+    <div class="form-group" style="width:50%;">
+        @Html.LabelFor(m => m.personel.Soyad)
+        @Html.TextBoxFor(m => m.personel.Soyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.personel.Soyad)
+    </div>
+    <div class="form-group" style="width:50%;">
+        @Html.LabelFor(m => m.personel.DepartmanId)
+        @Html.DropDownListFor(m => m.personel.DepartmanId, new SelectList(Model.Departmanlar, "Id", "Ad", 0), "Lütfen Departman Seçiniz", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.personel.DepartmanId)
+    </div>
+    <div class="form-group" style="width:50%;">
+
+        @Html.LabelFor(m=>m.personel.DogumGunu)
+        @Html.TextBoxFor(m => m.personel.DogumGunu, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "Date" })
+        @Html.ValidationMessageFor(m => m.personel.DogumGunu)
+    </div>
+    <div class="form-group" style="width:50%;">
+        @Html.LabelFor(m=>m.personel.Maas)
+        @Html.TextBoxFor(m => m.personel.Maas, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.personel.Maas)
+    </div>
+
+    <div class="form-group" style="width:50%;">
+
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.personel.Cinsiyet, true) Erkek
+            </label>
+
+            <label>
+                @Html.RadioButtonFor(m => m.personel.Cinsiyet, false) Kadın
+            </label>
+            @Html.ValidationMessageFor(m => m.personel.Cinsiyet)
+        </div>
+
+        @Html.HiddenFor(m => m.personel.Id)
+        <button type="submit" class="btn btn-success">Kaydet</button>
+
+    </div>
+
+}
+
